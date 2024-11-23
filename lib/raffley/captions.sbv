@@ -1,0 +1,436 @@
+0:00:00.040,0:00:03.804
+- [Mike] So our first step is to create an Elixir
+project and get some code running.
+
+0:00:03.804,0:00:07.808
+- [Nicole] And no surprise, Elixir has
+conventions for organizing projects and
+
+0:00:07.808,0:00:10.811
+great tooling to automate project tasks.
+
+0:00:10.811,0:00:14.760
+- To create a new Elixir project, we use
+the mix command and we say mix new,
+
+0:00:14.760,0:00:18.230
+and then the name of our project is going to be servy.
+
+0:00:18.230,0:00:21.430
+And it generated a few files and directories there.
+
+0:00:21.430,0:00:23.270
+We'll look at those in just a minute.
+
+0:00:23.270,0:00:26.270
+Now the mix tool lets us automate common project tasks.
+
+0:00:26.270,0:00:30.540
+In fact, if you just want to see all the tasks,
+you do mix help and it lists all those out.
+
+0:00:30.540,0:00:36.340
+So we did the mix new to create a new Elixir project,
+but there's a load of tasks in here for just common
+
+0:00:36.340,0:00:39.139
+things you want to do around your Elixir project.
+
+0:00:39.139,0:00:45.570
+So I'm just going to change directory into that servy
+project directory and then open it up in my editor.
+
+0:00:45.570,0:00:49.720
+Let's take a quick peek at the lightweight directory
+structure that the mix new command created.
+
+0:00:49.720,0:00:52.950
+We've got a lib directory, this is where
+our application code's going to live,
+
+0:00:52.950,0:00:56.700
+and it generated a servy.ex file,
+which we'll look at in just a second.
+
+0:00:56.700,0:01:00.590
+We also have a test directory, which no
+surprise has some tests inside of those,
+
+0:01:00.590,0:01:02.210
+some generated tests.
+
+0:01:02.210,0:01:04.200
+Again, we'll look at those a little bit later.
+
+0:01:04.200,0:01:09.480
+And then we have this mix.exs and this is where
+we configure our project and its dependencies.
+
+0:01:09.480,0:01:13.607
+We'll have to add a dependency a little bit later on in
+the course, so we'll come back to this file as well.
+
+0:01:13.607,0:01:19.010
+- Now don't let the two file
+extensions .ex and .exs throw you.
+
+0:01:19.010,0:01:21.632
+Both types of files contain Elixir code.
+
+0:01:21.632,0:01:28.850
+.ex files are meant to be compiled and then run,
+whereas .exs files are effectively interpreted
+
+0:01:28.850,0:01:31.447
+like scripts thus the trailing S.
+
+0:01:31.447,0:01:35.230
+Most of the time though,
+you'll just use the .ex extension
+
+0:01:35.230,0:01:40.020
+- And that's exactly the extension we have on this
+servy.ex because it's application code and all of our
+
+0:01:40.020,0:01:42.830
+application code is going to have a .ex extension.
+
+0:01:42.830,0:01:46.030
+So I'm just going to remove these
+comments so we can focus on the code.
+
+0:01:46.030,0:01:49.210
+And Elixir code is always organized in named modules.
+
+0:01:49.210,0:01:54.090
+So the file starts by defining a module here,
+which is just a namespace for functions.
+
+0:01:54.090,0:01:57.400
+It uses defmodule, then the
+name of the module is Servy.
+
+0:01:57.400,0:02:02.320
+Notice that it starts with an uppercase character
+and all module names in Elixir use camel case.
+
+0:02:02.320,0:02:05.820
+Then inside of the module, we have a named
+function called hello and the function
+
+0:02:05.820,0:02:09.210
+names are lowercase with underscores or snake case.
+
+0:02:09.210,0:02:12.541
+And all named functions must be
+defined inside of a module.
+
+0:02:12.541,0:02:17.580
+- But one thing that might trip you up that at least it
+tripped me up was trying to remember to type the do.
+
+0:02:17.580,0:02:20.510
+- Yeah, I always forget these dos
+on the ends of these lines.
+
+0:02:20.510,0:02:22.740
+So that's just something to keep in mind.
+
+0:02:22.740,0:02:25.870
+And this hello function is currently returning an atom.
+
+0:02:25.870,0:02:32.190
+So it's the atom :world and an atom is just a name
+whose value is the same as its name or a constant.
+
+0:02:32.190,0:02:34.990
+Let's just have it return a proper greeting here.
+
+0:02:34.990,0:02:37.890
+So we'll use an Elixir string,
+which is double quotes, no surprise.
+
+0:02:37.890,0:02:39.580
+And then, we can use string interpolation.
+
+0:02:39.580,0:02:42.750
+If we wanted to say hello, some name
+and then we could pass that name
+
+0:02:42.750,0:02:45.780
+in as an argument to the hello function.
+
+0:02:45.780,0:02:49.410
+Then to call a function, we're going to
+come down outside of this module and I'm
+
+0:02:49.410,0:02:54.670
+going to use IO, that's a module name that's built into
+Elixir, use puts, and then we use the module name,
+
+0:02:54.670,0:02:59.430
+which is servy in this case and the name of the
+function hello, and then we'll just pass it Elixir.
+
+0:02:59.430,0:03:03.050
+So defining modules and functions and
+then calling those functions on the modules
+
+0:03:03.050,0:03:04.630
+is pretty straightforward.
+
+0:03:04.630,0:03:06.940
+Obviously, the next thing we
+want to do is to run our code.
+
+0:03:06.940,0:03:12.290
+And to do that we're going to need to compile our
+Elixir files to bytecode and then run that bytecode
+
+0:03:12.290,0:03:14.350
+on the Erlang virtual machine.
+
+0:03:14.350,0:03:18.960
+Now the Erlang virtual machine is like 20 years old,
+so you can imagine what we're going to have to go
+
+0:03:18.960,0:03:22.680
+through just to print out Hello, Elixir to the console.
+
+0:03:22.680,0:03:25.100
+Makefiles, cross-compilers.
+
+0:03:25.100,0:03:29.938
+- The good news is once we get past
+this point, it's all downhill from here.
+
+0:03:29.939,0:03:31.270
+Just kidding.
+
+0:03:31.270,0:03:34.035
+Elixir makes it really easy to run our code.
+
+0:03:34.036,0:03:39.810
+- So the first way to run an Elixir file is using the
+elixir command and our servy.ex file is down in the
+
+0:03:39.810,0:03:45.660
+lib directory, so I just give it the relative path
+there and we see we get Hello, Elixir, no surprise.
+
+0:03:45.660,0:03:50.160
+But this is pretty cool when you think about it because
+the file got compiled in memory into bytecode and then
+
+0:03:50.160,0:03:52.910
+it was run on the Erlang virtual machine.
+
+0:03:52.910,0:03:58.760
+Now our file lives in the mix project directory under
+lib, but you can create a one-off Elixir file anywhere
+
+0:03:58.760,0:04:01.150
+you want and run it using the elixir command.
+
+0:04:01.150,0:04:05.850
+It doesn't have to be in a mix project directory like
+we have it here, but unless it's a one-off file,
+
+0:04:05.850,0:04:10.760
+I always put my code in a mix project directory because
+I usually end up with multiple files and that's just
+
+0:04:10.760,0:04:12.620
+the proper way to do it.
+
+0:04:12.620,0:04:14.470
+I can also run this back in Sublime.
+
+0:04:14.470,0:04:17.910
+I've got it set up if I do Apple + B,
+I get the output there.
+
+0:04:17.910,0:04:19.660
+It's Hello, Elixir.
+
+0:04:19.660,0:04:23.580
+And this is just set up to run the Elixir
+command on the current file.
+
+0:04:23.580,0:04:26.770
+And I'm going to use this approach at
+least for the first part of the course,
+
+0:04:26.770,0:04:30.470
+just so you don't have to watch me switch back and
+forth between the command line and the editor.
+
+0:04:30.470,0:04:33.456
+And it's just an easy way to get the results quickly.
+
+0:04:33.456,0:04:37.880
+- Another way to run our app is to
+use Elixir's interactive shell IEx.
+
+0:04:37.880,0:04:44.470
+- So you type iex just like that and it'll
+evaluate any expression, no surprise.
+
+0:04:44.470,0:04:50.670
+You can also call any built-in modules like
+String and the function reverse, for example.
+
+0:04:50.670,0:04:56.510
+But what happens if we try our servy module
+and call our hello passing in my name?
+
+0:04:56.510,0:04:58.950
+Well, it says servy.hello is undefined.
+
+0:04:58.950,0:05:01.168
+The module servy is not available.
+
+0:05:01.168,0:05:05.430
+And that's because by default IEx
+doesn't know about this servy file.
+
+0:05:05.430,0:05:10.220
+So one way to compile it and load it is using the c
+function and then we just give it a string,
+
+0:05:10.220,0:05:14.820
+which is the relative path to the file we want to run.
+
+0:05:14.820,0:05:17.580
+And you notice we immediately got Hello, Elixir.
+
+0:05:17.580,0:05:23.210
+So this compiled the file in memory and then loaded the
+servy module into the session and then any code that's
+
+0:05:23.210,0:05:24.810
+outside of the module is interpreted.
+
+0:05:24.810,0:05:28.590
+So this code right here that prints
+out Hello, Elixir got interpreted,
+
+0:05:28.590,0:05:31.170
+which is why we see the output right here.
+
+0:05:31.170,0:05:35.840
+To get out of IEx, you can hit Ctrl + C and
+this is going to open up the break menu.
+
+0:05:35.840,0:05:40.940
+And then you can either type A right here to
+get out of this session, or as most people do,
+
+0:05:40.940,0:05:42.610
+you just hit Ctrl + C again.
+
+0:05:42.610,0:05:46.210
+So to get off IEx, it's basically two Ctrl + Cs.
+
+0:05:46.210,0:05:51.530
+There's a shortcut to starting IEx and loading up a
+file. You can just use IEx and then give it the name
+
+0:05:51.530,0:05:54.187
+of the file, a relative path again as an argument.
+
+0:05:54.187,0:05:58.470
+And again, the file is compiled in memory and
+the servy module is loaded into the runtime.
+
+0:05:58.470,0:06:03.090
+And then, any code that's outside of the module is
+interpreted, which is why we see this right here.
+
+0:06:03.090,0:06:07.910
+So that's a shortcut to opening IEx and then using
+the c function to compile it and to get out of this,
+
+0:06:07.910,0:06:10.430
+I'm just going to hit Ctrl + C twice.
+
+0:06:10.430,0:06:18.900
+One final way to run code in IEx is to start the IEx
+session with a -S option and then mix,
+
+0:06:18.900,0:06:20.630
+and then it says it compiled the file.
+
+0:06:20.630,0:06:24.130
+We got the output because it
+interpreted this line up here again.
+
+0:06:24.130,0:06:28.530
+When you start IEx with the -S mix
+option, it knows about the project.
+
+0:06:28.530,0:06:32.850
+So we're in an IEx session
+in the context of our application.
+
+0:06:32.850,0:06:36.700
+So we can go ahead and use our
+module Servy.hello, for example.
+
+0:06:36.700,0:06:40.510
+I tend to use this approach because it compiles
+and loads all the modules in the project,
+
+0:06:40.510,0:06:45.390
+and we can interact with any of the application
+code so you don't have to compile it or load IEx
+
+0:06:45.390,0:06:47.070
+with a specific file.
+
+0:06:47.070,0:06:49.610
+You've got access to everything you need right here.
+
+0:06:49.610,0:06:52.380
+- So let's look at what happens
+when we need to recompile.
+
+0:06:52.380,0:06:56.616
+Let's say we change our code from Hello to Howdy.
+
+0:06:56.616,0:07:01.870
+- Well, if I save that away here in Sublime, I can
+hit Apple + B, again, we get back, Howdy, Elixir!
+
+0:07:01.871,0:07:07.109
+Down here, If I'm still in an IEx session, I can use
+the r function and then give it the name of a module.
+
+0:07:07.110,0:07:12.640
+In this case, our module is Servy, and that
+recompiles and reloads the given module.
+
+0:07:12.640,0:07:18.010
+You see we get a little bit of warning here saying,
+we're redefining that module and then it recompiled,
+
+0:07:18.010,0:07:22.520
+reloaded it, and we see that we've got Howdy,
+Elixir! Because it interpreted that line again.
+
+0:07:22.520,0:07:26.120
+So now if we say hello("mike"), it says Howdy, mike!
+
+0:07:26.120,0:07:30.000
+So I'm going to go ahead and comment out this line
+right here so it doesn't get interpreted every time we
+
+0:07:30.000,0:07:32.519
+load up our project in IEx going forward.
+
+0:07:32.519,0:07:36.750
+- So now we have a project and a jumping-off
+point from which to build our web server.
+
+0:07:36.750,0:07:43.000
+Next up, we'll handle our first HTTP request.
